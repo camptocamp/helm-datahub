@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helm-datahub.fullname" . }}-deployment
+  name: {{ include "helm-datahub.fullname" . }}-datahub-deployment
   labels:
     {{- include "helm-datahub.labels" . | nindent 4 }}
 spec:
@@ -17,6 +17,7 @@ spec:
       {{- end }}
       labels:
         {{- include "helm-datahub.selectorLabels" . | nindent 8 }}
+        org.geonetwork.service/name: {{ include "helm-datahub.fullname" . }}-datahub-deployment
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
